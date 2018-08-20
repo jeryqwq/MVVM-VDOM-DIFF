@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>手撸MVVM框架</title>
+	<!-- <script src="traceur.js"></script> -->
+	<script src="watcher.js"></script>
+	<script src="observe.js"></script>
+	<script src="compile.js"></script>
+	<script src="MVVM.js"></script>
+	<script src="element.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<div>1</div>
+		name:<input type="text" v-model="msg" />
+		age:<input type="text" v-model="age" />
+		<input type="text" v-model="data.name" />
+		<h2>{{msg}}</h2>
+		<ul>
+			<li>{{msg}}</li>
+			<li>2</li>
+			<li>{{data.name}}</li>
+		</ul>
+	</div>
+</body>
+<script>
+	var vm = new MVVM({
+		el: '#app',
+		data: {
+			msg: 'cj',
+			age:22,
+			data:{
+				name:'this is data'
+			}
+		}
+
+
+	});
+	let vertualDom=createElement('ul',{
+		clas:'list'},[createElement('li',{class:'item'},['a']),
+		createElement('li',{class:'item'},['b']),
+		createElement('li',{class:'item'},['c'])]);
+		let el =render(vertualDom);
+		renderDom(el,document.getElementById('app'))
+</script>
+
+</html>
