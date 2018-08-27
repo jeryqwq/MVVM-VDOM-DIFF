@@ -1,50 +1,43 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-	<meta charset="UTF-8">
-	<title>手撸MVVM框架</title>
-	<!-- <script src="traceur.js"></script> -->
-	<script src="watcher.js"></script>
-	<script src="observe.js"></script>
-	<script src="compile.js"></script>
-	<script src="MVVM.js"></script>
-	<script src="element.js"></script>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="element.js"></script>
+    <script src="diff.js"></script>
+    <script  src="./patch.js"></script>
 </head>
-
+<style>
+.menu{
+    border: solid 2px black;
+}
+</style>
 <body>
-	<div id="app">
-		<div>1</div>
-		name:<input type="text" v-model="msg" />
-		age:<input type="text" v-model="age" />
-		<input type="text" v-model="data.name" />
-		<h2>{{msg}}</h2>
-		<ul>
-			<li>{{msg}}</li>
-			<li>2</li>
-			<li>{{data.name}}</li>
-		</ul>
-	</div>
+    <div id="root">
+    </div>
 </body>
 <script>
-	var vm = new MVVM({
-		el: '#app',
-		data: {
-			msg: 'cj',
-			age:22,
-			data:{
-				name:'this is data'
-			}
-		}
+let vistualDom=createElement("ul",{className:'menu'},[
+    createElement("li",{className:'li',name:'li'},["text1"]),
+createElement("li",{className:'li',style:'background:red'},["text12"]),
+createElement("li",{className:'li',style:'color:yellow'},[createElement('br',{},[]),createElement('br',{},[]),createElement('br',{},[])]),
+])
 
+let vistualDom1=createElement("ul",{className:'menu-grouop','v-show':'false'},[
+    createElement("li",{className:'li',name:'li1'},["text4"]),
+createElement("div",{className:'li',style:'background:black'},["text5"])
+])
+let patches=new Diff(vistualDom,vistualDom1)
+let el =render(vistualDom);
+let el1 =render(vistualDom1);
 
-	});
-	let vertualDom=createElement('ul',{
-		clas:'list'},[createElement('li',{class:'item'},['a']),
-		createElement('li',{class:'item'},['b']),
-		createElement('li',{class:'item'},['c'])]);
-		let el =render(vertualDom);
-		renderDom(el,document.getElementById('app'))
+renderDom(el,"#root")
+renderDom(el1,"#root")
+let patch=new Patch(vistualDom,patches);
+
+// let patches=diffPatches(vistualDom,vistualDom1);
+console.log(patches);
 </script>
-
 </html>
