@@ -13,6 +13,12 @@
 .menu{
     border: solid 2px black;
 }
+.cjli{
+    color: blue
+}
+.menu-grouop{
+    list-style: none
+}
 </style>
 <body>
     <div id="root">
@@ -21,23 +27,23 @@
 <script>
 let vistualDom=createElement("ul",{className:'menu'},[
     createElement("li",{className:'li',name:'li'},["text1"]),
-createElement("li",{className:'li',style:'background:red'},["text12"]),
-createElement("li",{className:'li',style:'color:yellow'},[createElement('br',{},[]),createElement('br',{},[]),createElement('br',{},[])]),
+createElement("li",{className:'li',style:'background:red'},["text2"]),
+createElement("li",{className:'li',style:'color:yellow'},["text3"]),
 ])
 
-let vistualDom1=createElement("ul",{className:'menu-grouop','v-show':'false'},[
-    createElement("li",{className:'li',name:'li1'},["text4"]),
-createElement("div",{className:'li',style:'background:black'},["text5"])
+let vistualDom1=createElement("ul",{className:'menu-grouop'},[
+    createElement("li",{className:'cjli',name:'li1'},["text4"]),
+createElement("li",{className:'cjli',style:'background:red'},["text5"]),
+createElement("li",{className:'cjli2',style:'background:red','v-show':'false'},["text6"]),
+createElement("li",{className:'cjli',name:'li1'},["text7"])
 ])
-let patches=new Diff(vistualDom,vistualDom1)
-let el =render(vistualDom);
+// let patches=new Diff(vistualDom,vistualDom1)
+let el =render(vistualDom);//生成用createElement函数创建的DOM元素
 let el1 =render(vistualDom1);
 
-renderDom(el,"#root")
-renderDom(el1,"#root")
-let patch=new Patch(vistualDom,patches);
-
-// let patches=diffPatches(vistualDom,vistualDom1);
+renderDom(el,"#root")//渲染元素为真实DOM
+let patches=diffPatches(vistualDom,vistualDom1);//DIFF深度对比两个更改前后的元素，返回补丁包
 console.log(patches);
+new Patch(el,patches);//打补丁
 </script>
 </html>
