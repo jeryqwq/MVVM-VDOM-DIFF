@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./compile.js"></script>
+    <script src="./observe.js"></script>
+    <script src="./watcher.js"></script>
+    <script src="./MVVM.js"></script>
     <script src="element.js"></script>
     <script src="diff.js"></script>
     <script  src="./patch.js"></script>
@@ -14,7 +18,8 @@
     border: solid 2px black;
 }
 .cjli{
-    color: blue
+    color: black;
+    background: burlywood
 }
 .menu-grouop{
     list-style: none
@@ -25,6 +30,7 @@
     </div>
 </body>
 <script>
+    //生成渲染元素
 let vistualDom=createElement("ul",{className:'menu'},[
     createElement("li",{className:'li',name:'li'},["text1"]),
 createElement("li",{className:'li',style:'background:red'},["text2"]),
@@ -32,10 +38,10 @@ createElement("li",{className:'li',style:'color:yellow'},["text3"]),
 ])
 
 let vistualDom1=createElement("ul",{className:'menu-grouop'},[
-    createElement("li",{className:'cjli',name:'li1'},["text4"]),
-createElement("li",{className:'cjli',style:'background:red'},["text5"]),
-createElement("li",{className:'cjli2',style:'background:red','v-show':'false'},["text6"]),
-createElement("li",{className:'cjli',name:'li1'},["text7"])
+    createElement("li",{className:'cjli',name:'li1'},["{{msg}}"]),
+createElement("li",{className:'cjli',style:'background:red'},["{{desc}}"]),
+createElement("li",{className:'cjli2',style:'background:red'},["text6"]),
+createElement("li",{className:'cjli',name:'li1'},["{{deep.test}}"])
 ])
 // let patches=new Diff(vistualDom,vistualDom1)
 let el =render(vistualDom);//生成用createElement函数创建的DOM元素
@@ -45,5 +51,23 @@ renderDom(el,"#root")//渲染元素为真实DOM
 let patches=diffPatches(vistualDom,vistualDom1);//DIFF深度对比两个更改前后的元素，返回补丁包
 console.log(patches);
 new Patch(el,patches);//打补丁
+
+
+
+//MVVM层数据绑定,语法与vue相似
+var vm=new MVVM({
+el:"#root",
+data:{
+msg:'CHENJIE',
+desc:"this is a mini framework",
+deep:{
+    test:'deepTestData'
+}
+}
+
+
+})
+
+
 </script>
 </html>
