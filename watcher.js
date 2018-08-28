@@ -21,7 +21,7 @@ this.value=this.get();
      };
      update(){
 let newValue=this.getVal(this.vm,this.expr);
-let newValue="chenjie123123"
+//let newValue="chenjie123123"
 let oldValue=this.value;
 console.log(newValue,oldValue,this.expr)
 if(oldValue!==newValue){
