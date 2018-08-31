@@ -18,7 +18,8 @@ this.children=children;
 node.style.cssText=value;
             break;
     case 'className':
-    node.setAttribute('class',value)
+    node.setAttribute('class',value);
+    break;
         default:
         node.setAttribute(key,value)
             break;

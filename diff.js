@@ -4,12 +4,12 @@ class Diff {
         this.newTree = newTree;
         this.patches = [];
         this.index = 0;
-        this.work(this.oldTree, this.newTree, this.index, this.patches);
+        this.work(this.oldTree, this.newTree, this.index, this.patches);   
+        console.log(this.patches[5])     
     }
 
     work(oldTree, newTree, index, patches) {
         let currentPatch = [];
-        // console.log(oldTree,newTree);
         if (!newTree) {
             currentPatch.push({
                 TYPE: "DELETE",
@@ -49,11 +49,9 @@ class Diff {
             this.work(child, newChildren[i], ++this.index, patches)
         });
         this.addInsertNode(oldChildren, newChildren);
-
     }
                   //todo newChildren新增节点
     addInsertNode(oldChildren,newChildren){
-        console.log( newChildren)
               if(newChildren){
               if (newChildren.length > oldChildren.length) {
                 let currentPatch = [];
@@ -64,7 +62,7 @@ class Diff {
                             TYPE: "INSERT",
                             insertNode: newChildren[key]
                         })
-                        this.patches[index] = currentPatch;
+                        this.patches.push(currentPatch);
                     }
                 }
             }
