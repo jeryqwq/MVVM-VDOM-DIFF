@@ -36,15 +36,15 @@ currentPatch.forEach(patch => {
             console.log(1)
             child.parentNode.appendChild(render(patch.insertNode))
             break;
-            case "ATTRS":
-            for(let key in child.attrs){
-                let value=child.attrs[key];
-                if(value){
-                    Element.setAttr(child,key,value)
-                }else{
-                    child.removeAttribute(key)
-                }
-            }
+        case "ATTRS":
+for(let key in patch.attrs){
+    let value=patch.attrs[key];
+    if(value){
+        Element.setAttr(child,key,value);
+    }else{
+        node.removeAttribute(key);
+    }
+}
             break;
             case "REMOVE":
             child.parentNode.removeChild(child);
