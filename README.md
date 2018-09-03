@@ -23,6 +23,8 @@ MVVM,数据劫持。。。。
 ```
 深度遍历节点，生成新旧节点的补丁对象patches,
 patches(补丁)-----数组类型
+```
+```
 例:{ATTR:"ATTRS",attrs:{className:'list',style:'background:red'}};
 TYPE：INSERT(插入) insertNode:节点元素或文本节点(虚拟DOM，需要render函数转换为真是DOM并插入到父节点。....
 TYPE:ATTRS(属性更改)，attrs:新属性值
